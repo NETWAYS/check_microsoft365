@@ -1,8 +1,6 @@
 name: golangci-lint
 on:
   push:
-    tags:
-      - v*
     branches:
       - main
   pull_request:
@@ -13,6 +11,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/go-build
+            ~/.cache/golangci-lint
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-golangci-lint-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-golangci-lint-
+
+      - name: Download modules
+        run: go get -v -t ./...
 
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2

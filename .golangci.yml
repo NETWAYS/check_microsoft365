@@ -1,6 +1,3 @@
-run:
-  deadline: 1m
-
 linters:
   disable-all: false
   enable:
