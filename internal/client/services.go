@@ -28,6 +28,7 @@ func (c *Client) LoadAllServices() (services *Services, err error) {
 	apiServices := servicesInfo.GetValue()
 	for _, s := range apiServices {
 		cloned := s
+
 		services.Services = append(services.Services, &Service{Service: &cloned})
 	}
 

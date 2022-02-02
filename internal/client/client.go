@@ -32,17 +32,17 @@ func (c *Client) NewGraphServiceClient() error {
 		&azidentity.ClientSecretCredentialOptions{})
 
 	if err != nil {
-		return fmt.Errorf("error creating credentials: %v", err)
+		return fmt.Errorf("error creating credentials: %w", err)
 	}
 
 	auth, err := a.NewAzureIdentityAuthenticationProviderWithScopes(cred, []string{c.Scope})
 	if err != nil {
-		return fmt.Errorf("error creating authentication provider: %v", err)
+		return fmt.Errorf("error creating authentication provider: %w", err)
 	}
 
 	adapter, err := msgraphsdkgo.NewGraphRequestAdapter(auth)
 	if err != nil {
-		return fmt.Errorf("error creating graph adapter: %v", err)
+		return fmt.Errorf("error creating graph adapter: %w", err)
 	}
 
 	client := msgraphsdkgo.NewGraphServiceClient(adapter)
