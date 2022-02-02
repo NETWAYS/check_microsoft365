@@ -22,6 +22,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-golangci-lint-
 
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
+
       - name: Download modules
         run: go get -v -t ./...
 
