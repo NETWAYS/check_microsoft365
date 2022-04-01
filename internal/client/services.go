@@ -68,10 +68,12 @@ func (s *Services) GetStatus(override StateOverride) int {
 	return result.WorstState(states...)
 }
 
-func (s *Services) GetOuput(override StateOverride) (output string) {
+func (s *Services) GetOuput(override StateOverride, all bool) (output string) {
 	for _, service := range s.Services {
 		rc := service.GetStatus(override)
-		if rc != 0 {
+		if all {
+			output += fmt.Sprintf("[%s] %s\n", check.StatusText(rc), service.GetOutput())
+		} else if rc != 0 {
 			output += fmt.Sprintf("[%s] %s\n", check.StatusText(rc), service.GetOutput())
 		}
 	}
