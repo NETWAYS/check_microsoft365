@@ -59,11 +59,11 @@ For more information how to register an app see https://docs.microsoft.com/en-us
 		}
 
 		rc := services.GetStatus(override)
-		output += services.GetOuput(override)
+		output += services.GetOuput(override, cliConfig.ShowAll)
 
 		summary += strconv.Itoa(totalCrit) + " Critical - " + " " + strconv.Itoa(totalWarn) + " Warning:\n"
 
-		if rc == 0 {
+		if rc == 0 && !cliConfig.ShowAll {
 			output = "All services are healthy"
 		}
 
@@ -107,6 +107,7 @@ func init() {
 		"The name of one or more specific service/s")
 	fs.StringSliceVar(&cliConfig.StateOverrides, "state-override", nil,
 		"States to override (e.g. STATENAME=ok)")
+	fs.BoolVar(&cliConfig.ShowAll, "all", false, "Displays all services regardless of the status")
 
 	fs.SortFlags = false
 	servicehealth.DisableFlagsInUseLine = true

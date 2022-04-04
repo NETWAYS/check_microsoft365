@@ -14,6 +14,7 @@ type Config struct {
 	ServiceName    string
 	ServiceNames   []string
 	StateOverrides []string
+	ShowAll        bool
 }
 
 var cliConfig Config
