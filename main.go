@@ -6,9 +6,9 @@ import (
 )
 
 var (
-	version = "0.1.0"
-	commit  = ""
-	date    = ""
+	version = "1.0.0"
+	commit  = "102e653"
+	date    = "04.04.2022"
 )
 
 func main() {
