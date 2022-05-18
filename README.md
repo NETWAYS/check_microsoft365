@@ -16,9 +16,13 @@ Usage:
   check_microsoft365 servicehealth
 
 Flags:
-  -n, --servicenames strings     The name of one or more specific service/s
-      --state-override strings   States to override (e.g. STATENAME=ok)
-  -h, --help                     help for servicehealth
+  -n, --servicenames strings      The name of one or more specific service/s
+      --state-override strings    States to override (e.g. STATENAME=ok)
+      --all                       Displays all services regardless of the status
+  -M, --display-message           Displays the issue message to the specified service
+  -i, --issue-start-time string   Displays only issue massages in the period of time given. Possbile values are e.G. '1h', '30m' (default "15m")
+  -h, --help                      help for servicehealth
+
 
 Global Flags:
   -c, --clientid string       The client id from your app registration (env: AZURE_CLIENT_ID)

@@ -7,14 +7,16 @@ import (
 )
 
 type Config struct {
-	TenantId       string `env:"AZURE_TENANT_ID"`
-	ClientId       string `env:"AZURE_CLIENT_ID"`
-	ClientSecret   string `env:"AZURE_CLIENT_SECRET"`
-	Scope          string
-	ServiceName    string
-	ServiceNames   []string
-	StateOverrides []string
-	ShowAll        bool
+	TenantId            string `env:"AZURE_TENANT_ID"`
+	ClientId            string `env:"AZURE_CLIENT_ID"`
+	ClientSecret        string `env:"AZURE_CLIENT_SECRET"`
+	Scope               string
+	ServiceName         string
+	ServiceNames        []string
+	StateOverrides      []string
+	ShowAll             bool
+	DisplayIssueMessage bool
+	IssueStartTime      string
 }
 
 var cliConfig Config
