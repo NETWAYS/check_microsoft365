@@ -92,7 +92,7 @@ on `Add a permission`
 and select on the right-hand side `Microsoft Graph`. According to that click on `Application permissions` and
 search/select for
 `ServiceHealth.Read.All`, which allows the app to read your tenant's service health information, without a signed-in
-user.
+user. More over, if issue messages are required in the plugin output, you may also have set the `ServiceMessage.Read.All` permission.
 
 For more information, visit [How to register an app](https://docs.microsoft.com/en-us/graph/auth-register-app-v2)
 , [How to find the tanant id](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant)
