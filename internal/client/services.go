@@ -6,7 +6,6 @@ import (
 	"github.com/NETWAYS/go-check/result"
 	"github.com/microsoftgraph/msgraph-sdk-go/admin/serviceannouncement/issues"
 	"strings"
-	"time"
 )
 
 type Services struct {
@@ -17,7 +16,7 @@ type Issues struct {
 	Issues []*Issue
 }
 
-func (c *Client) LoadAllIssues(diff string) (issuesStruct *Issues, err error) {
+func (c *Client) LoadAllIssues() (issuesStruct *Issues, err error) {
 	var offset int32 = 0
 
 	serviceIssues, err := c.GraphServiceClient.Admin().ServiceAnnouncement().Issues().Get(&issues.IssuesRequestBuilderGetOptions{
@@ -31,22 +30,12 @@ func (c *Client) LoadAllIssues(diff string) (issuesStruct *Issues, err error) {
 		return
 	}
 
-	tDiff, err := time.ParseDuration(diff)
-	if err != nil {
-		err = fmt.Errorf("could not parse 'issue-start-time': %w", err)
-		return
-	}
-
 	issuesStruct = &Issues{}
 
 	issueVals := serviceIssues.GetValue()
 
 	for _, issue := range issueVals {
-		timeDiff := time.Now().Sub(*issue.GetStartDateTime())
-
 		if *issue.GetIsResolved() {
-			continue
-		} else if timeDiff > tDiff {
 			continue
 		}
 
@@ -115,16 +104,14 @@ func (s *Services) GetStatus(override StateOverride) int {
 	return result.WorstState(states...)
 }
 
-func (s *Services) GetOuput(override StateOverride, all bool, issues *Issues, displMsg bool) (output string) {
+func (s *Services) GetOutput(override StateOverride, all bool, issues *Issues, displMsg bool) (output string) {
 	if displMsg {
-		for _, issue := range issues.Issues {
-			for _, service := range s.Services {
-				rc := service.GetStatus(override)
-				if all {
-					output += fmt.Sprintf("[%s] %s\n", check.StatusText(rc), service.GetOutput(issue.Issue, displMsg))
-				} else if rc != 0 {
-					output += fmt.Sprintf("[%s] %s\n", check.StatusText(rc), service.GetOutput(issue.Issue, displMsg))
-				}
+		for _, service := range s.Services {
+			rc := service.GetStatus(override)
+			if all {
+				output += fmt.Sprintf("[%s] %s\n", check.StatusText(rc), service.GetOutput(issues, displMsg))
+			} else if rc != 0 {
+				output += fmt.Sprintf("[%s] %s\n", check.StatusText(rc), service.GetOutput(issues, displMsg))
 			}
 		}
 	} else {

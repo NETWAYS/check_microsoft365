@@ -24,14 +24,16 @@ func (s *Service) GetStatus(override StateOverride) int {
 	}
 }
 
-func (s *Service) GetOutput(issue *graph.ServiceHealthIssue, displMsg bool) (output string) {
+func (s *Service) GetOutput(issues *Issues, displMsg bool) (output string) {
 	service := s.Service
 
 	output = fmt.Sprintf("%s: %s %s", *service.GetId(), *service.GetService(), service.GetStatus().String())
 
 	if displMsg {
-		if *service.GetService() == *issue.GetService() {
-			output += fmt.Sprintf("\n  \\_ %s", *issue.GetImpactDescription())
+		for idx, issue := range issues.Issues {
+			if *service.GetService() == *issue.Issue.GetService() {
+				output += fmt.Sprintf("\n  \\_[%d] %s: %s", idx, *issue.Issue.GetStartDateTime(), *issue.Issue.GetImpactDescription())
+			}
 		}
 	}
 

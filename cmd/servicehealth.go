@@ -47,7 +47,7 @@ For more information how to register an app see https://docs.microsoft.com/en-us
 		}
 
 		if cliConfig.DisplayIssueMessage {
-			issues, err = c.LoadAllIssues(cliConfig.IssueStartTime)
+			issues, err = c.LoadAllIssues()
 		}
 
 		if err != nil {
@@ -66,7 +66,7 @@ For more information how to register an app see https://docs.microsoft.com/en-us
 		}
 
 		rc := services.GetStatus(override)
-		output += services.GetOuput(override, cliConfig.ShowAll, issues, cliConfig.DisplayIssueMessage)
+		output += services.GetOutput(override, cliConfig.ShowAll, issues, cliConfig.DisplayIssueMessage)
 
 		summary += strconv.Itoa(totalCrit) + " Critical - " + " " + strconv.Itoa(totalWarn) + " Warning:\n"
 
@@ -117,8 +117,6 @@ func init() {
 	fs.BoolVar(&cliConfig.ShowAll, "all", false, "Displays all services regardless of the status")
 	fs.BoolVarP(&cliConfig.DisplayIssueMessage, "display-message", "M", false,
 		"Displays the issue message to the specified service")
-	fs.StringVarP(&cliConfig.IssueStartTime, "issue-start-time", "i", "",
-		"Displays only issue massages in the period of time given. Possible values are e.G. '1h', '30m'")
 
 	fs.SortFlags = false
 	servicehealth.DisableFlagsInUseLine = true
