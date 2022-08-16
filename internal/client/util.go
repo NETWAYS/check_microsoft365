@@ -10,7 +10,7 @@ func LeveltoState(level string) (state int) {
 	case "SERVICEOPERATIONAL":
 		return check.OK
 	case "INVESTIGATING":
-		return check.Critical
+		return check.Warning
 	case "RESTORINGSERVICE":
 		return check.Warning
 	case "VERIFYINGSERVICE":
@@ -18,7 +18,7 @@ func LeveltoState(level string) (state int) {
 	case "SERVICERESTORED":
 		return check.OK
 	case "POSTINCIDENTREVIEWPUBLISHED":
-		return check.Critical
+		return check.OK
 	case "SERVICEDEGRADATION":
 		return check.Critical
 	case "SERVICEINTERRUPTION":
@@ -28,7 +28,7 @@ func LeveltoState(level string) (state int) {
 	case "FALSEPOSITIVE":
 		return check.OK
 	case "INVESTIGATIONSUSPENDED":
-		return check.Critical
+		return check.Warning
 	case "RESOLVED":
 		return check.OK
 	case "MITIGATEDEXTERNAL":
