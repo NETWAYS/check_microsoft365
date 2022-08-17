@@ -16,15 +16,15 @@ func main() {
 }
 
 //goland:noinspection GoBoolExpressions
-func buildVersion() string {
-	result := version
+func buildVersion() (result string) {
+	result = version
 
 	if commit != "" {
-		result = fmt.Sprintf("%s\ncommit: %s", result, commit)
+		result += fmt.Sprintf("\ncommit: %s", commit)
 	}
 
 	if date != "" {
-		result = fmt.Sprintf("%s\ndate: %s", result, date)
+		result += fmt.Sprintf("\ndate: %s", date)
 	}
 
 	return result
