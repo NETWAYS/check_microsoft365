@@ -18,11 +18,14 @@ type Issues struct {
 
 func (c *Client) LoadAllIssues() (issuesStruct *Issues, err error) {
 	var offset int32 = 0
+	var filter = "isResolved eq false"
 
 	serviceIssues, err := c.GraphServiceClient.Admin().ServiceAnnouncement().Issues().Get(&issues.IssuesRequestBuilderGetOptions{
 		Q: &issues.IssuesRequestBuilderGetQueryParameters{
 			// Skip the first n items
 			Skip: &offset,
+			// filters for issues where 'isResolved': false
+			Filter: &filter,
 		},
 	})
 	if err != nil {

@@ -30,9 +30,12 @@ func (s *Service) GetOutput(issues *Issues, displMsg bool) (output string) {
 	output = fmt.Sprintf("%s: %s %s", *service.GetId(), *service.GetService(), service.GetStatus().String())
 
 	if displMsg {
-		for idx, issue := range issues.Issues {
+		for _, issue := range issues.Issues {
 			if *service.GetService() == *issue.Issue.GetService() {
-				output += fmt.Sprintf("\n  \\_[%d] %s: %s", idx, *issue.Issue.GetStartDateTime(), *issue.Issue.GetImpactDescription())
+				output += fmt.Sprintf("\n  \\_[%s] %s: %s",
+					*issue.Issue.GetClassification(),
+					*issue.Issue.GetStartDateTime(),
+					*issue.Issue.GetImpactDescription())
 			}
 		}
 	}
