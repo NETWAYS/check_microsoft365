@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/NETWAYS/go-check"
 	"github.com/NETWAYS/go-check/result"
+	"github.com/microsoftgraph/msgraph-sdk-go/admin/serviceannouncement/issues"
 	"strings"
 )
 
@@ -11,7 +12,46 @@ type Services struct {
 	Services []*Service
 }
 
-func (c *Client) LoadAllServices() (services *Services, err error) {
+type Issues struct {
+	Issues []*Issue
+}
+
+func (c *Client) LoadAllIssues() (issuesStruct *Issues, err error) {
+	var offset int32 = 0
+
+	var filter = "isResolved eq false"
+
+	serviceIssues, err := c.GraphServiceClient.Admin().ServiceAnnouncement().Issues().Get(&issues.IssuesRequestBuilderGetOptions{
+		Q: &issues.IssuesRequestBuilderGetQueryParameters{
+			// Skip the first n items
+			Skip: &offset,
+			// filters for issues where 'isResolved': false
+			Filter: &filter,
+		},
+	})
+	if err != nil {
+		err = fmt.Errorf("could not fetch service issues: %w", err)
+		return
+	}
+
+	issuesStruct = &Issues{}
+
+	issueVals := serviceIssues.GetValue()
+
+	for _, issue := range issueVals {
+		if *issue.GetIsResolved() {
+			continue
+		}
+
+		cloned := issue
+
+		issuesStruct.Issues = append(issuesStruct.Issues, &Issue{Issue: &cloned})
+	}
+
+	return
+}
+
+func (c *Client) LoadAllServices() (servicesStruct *Services, err error) {
 	servicesInfo, err := c.GraphServiceClient.Admin().ServiceAnnouncement().HealthOverviews().Get(nil)
 	if err != nil {
 		err = fmt.Errorf("could not fetch services health: %w", err)
@@ -23,13 +63,13 @@ func (c *Client) LoadAllServices() (services *Services, err error) {
 		return
 	}
 
-	services = &Services{}
+	servicesStruct = &Services{}
 
 	apiServices := servicesInfo.GetValue()
 	for _, s := range apiServices {
 		cloned := s
 
-		services.Services = append(services.Services, &Service{Service: &cloned})
+		servicesStruct.Services = append(servicesStruct.Services, &Service{Service: &cloned})
 	}
 
 	return
@@ -68,13 +108,24 @@ func (s *Services) GetStatus(override StateOverride) int {
 	return result.WorstState(states...)
 }
 
-func (s *Services) GetOuput(override StateOverride, all bool) (output string) {
-	for _, service := range s.Services {
-		rc := service.GetStatus(override)
-		if all {
-			output += fmt.Sprintf("[%s] %s\n", check.StatusText(rc), service.GetOutput())
-		} else if rc != 0 {
-			output += fmt.Sprintf("[%s] %s\n", check.StatusText(rc), service.GetOutput())
+func (s *Services) GetOutput(override StateOverride, all bool, issues *Issues, displMsg bool) (output string) {
+	if displMsg {
+		for _, service := range s.Services {
+			rc := service.GetStatus(override)
+			if all {
+				output += fmt.Sprintf("[%s] %s\n", check.StatusText(rc), service.GetOutput(issues, displMsg))
+			} else if rc != 0 {
+				output += fmt.Sprintf("[%s] %s\n", check.StatusText(rc), service.GetOutput(issues, displMsg))
+			}
+		}
+	} else {
+		for _, service := range s.Services {
+			rc := service.GetStatus(override)
+			if all {
+				output += fmt.Sprintf("[%s] %s\n", check.StatusText(rc), service.GetOutput(nil, displMsg))
+			} else if rc != 0 {
+				output += fmt.Sprintf("[%s] %s\n", check.StatusText(rc), service.GetOutput(nil, displMsg))
+			}
 		}
 	}
 

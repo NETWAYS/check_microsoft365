@@ -35,12 +35,19 @@ For more information how to register an app see https://docs.microsoft.com/en-us
 
 		override := buildStateOverrides()
 
-		var services *client.Services
+		var (
+			services *client.Services
+			issues   *client.Issues
+		)
 
 		if cliConfig.ServiceNames != nil {
 			services, err = c.LoadServices(cliConfig.ServiceNames)
 		} else {
 			services, err = c.LoadAllServices()
+		}
+
+		if cliConfig.DisplayIssueMessage {
+			issues, err = c.LoadAllIssues()
 		}
 
 		if err != nil {
@@ -59,7 +66,7 @@ For more information how to register an app see https://docs.microsoft.com/en-us
 		}
 
 		rc := services.GetStatus(override)
-		output += services.GetOuput(override, cliConfig.ShowAll)
+		output += services.GetOutput(override, cliConfig.ShowAll, issues, cliConfig.DisplayIssueMessage)
 
 		summary += strconv.Itoa(totalCrit) + " Critical - " + " " + strconv.Itoa(totalWarn) + " Warning:\n"
 
@@ -108,6 +115,8 @@ func init() {
 	fs.StringSliceVar(&cliConfig.StateOverrides, "state-override", nil,
 		"States to override (e.g. STATENAME=ok)")
 	fs.BoolVar(&cliConfig.ShowAll, "all", false, "Displays all services regardless of the status")
+	fs.BoolVarP(&cliConfig.DisplayIssueMessage, "display-message", "M", false,
+		"Displays the issue message to the specified service")
 
 	fs.SortFlags = false
 	servicehealth.DisableFlagsInUseLine = true
