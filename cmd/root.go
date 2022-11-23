@@ -13,7 +13,7 @@ var (
 var rootCmd = &cobra.Command{
 	Use:   "check_microsoft365",
 	Short: "Icinga check plugin to check Microsoft365",
-	PersistentPostRun: func(cmd *cobra.Command, args []string) {
+	PersistentPreRun: func(cmd *cobra.Command, args []string) {
 		go check.HandleTimeout(Timeout)
 	},
 	Run: Help,
