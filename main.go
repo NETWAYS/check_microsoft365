@@ -6,9 +6,10 @@ import (
 )
 
 var (
-	version = "1.0.0"
-	commit  = "102e653"
-	date    = "04.04.2022"
+	// These get filled at build time with the proper vaules
+	version = "development"
+	commit  = "HEAD"
+	date    = "latest"
 )
 
 func main() {
