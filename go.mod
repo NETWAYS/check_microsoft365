@@ -5,7 +5,7 @@ go 1.16
 require (
 	github.com/Azure/azure-sdk-for-go/sdk/azidentity v0.13.0
 	github.com/Azure/azure-sdk-for-go/sdk/internal v0.9.0 // indirect
-	github.com/NETWAYS/go-check v0.2.0
+	github.com/NETWAYS/go-check v0.3.0
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/microsoft/kiota/abstractions/go v0.0.0-20220201092916-896e79b2ca52 // indirect
 	github.com/microsoft/kiota/authentication/go/azure v0.0.0-20220201092916-896e79b2ca52
@@ -16,5 +16,4 @@ require (
 	github.com/spf13/cobra v1.3.0
 	golang.org/x/crypto v0.0.0-20220131195533-30dcbda58838 // indirect
 	golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd // indirect
-	golang.org/x/sys v0.0.0-20220128215802-99c3d69c2c27 // indirect
 )
