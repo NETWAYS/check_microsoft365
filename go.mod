@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/Azure/azure-sdk-for-go/sdk/azidentity v0.13.0
-	github.com/NETWAYS/go-check v0.3.0
+	github.com/NETWAYS/go-check v0.4.0
 	github.com/microsoft/kiota/authentication/go/azure v0.0.0-20220201092916-896e79b2ca52
 	github.com/microsoftgraph/msgraph-sdk-go v0.7.0
 	github.com/spf13/cobra v1.6.1
@@ -25,7 +25,7 @@ require (
 	github.com/microsoftgraph/msgraph-sdk-go-core v0.0.5 // indirect
 	github.com/mitchellh/go-ps v1.0.0 // indirect
 	github.com/pkg/browser v0.0.0-20210911075715-681adbf594b8 // indirect
-	github.com/sirupsen/logrus v1.8.1 // indirect
+	github.com/sirupsen/logrus v1.9.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/yosida95/uritemplate/v3 v3.0.1 // indirect
 	golang.org/x/crypto v0.6.0 // indirect
