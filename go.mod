@@ -7,7 +7,7 @@ require (
 	github.com/NETWAYS/go-check v0.4.1
 	github.com/microsoft/kiota/authentication/go/azure v0.0.0-20220201092916-896e79b2ca52
 	github.com/microsoftgraph/msgraph-sdk-go v0.7.0
-	github.com/spf13/cobra v1.6.1
+	github.com/spf13/cobra v1.7.0
 )
 
 require (
@@ -17,7 +17,7 @@ require (
 	github.com/cjlapao/common-go v0.0.18 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/google/uuid v1.3.0 // indirect
-	github.com/inconshreveable/mousetrap v1.0.1 // indirect
+	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/kylelemons/godebug v1.1.0 // indirect
 	github.com/microsoft/kiota/abstractions/go v0.0.0-20220201092916-896e79b2ca52 // indirect
 	github.com/microsoft/kiota/http/go/nethttp v0.0.0-20220201092916-896e79b2ca52 // indirect
