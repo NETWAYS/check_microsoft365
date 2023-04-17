@@ -1,5 +1,7 @@
 run:
-  timeout: 10m
+  deadline: 1m
+  skip-files:
+    - '(.+)_test\.go'
 
 linters:
   disable-all: false
@@ -7,22 +9,17 @@ linters:
     - funlen
     - dogsled
     - dupl
-    # - lll
     - whitespace
     - wsl
     - exportloopref
   disable:
+    - lll
     - scopelint
-    - bodyclose
-    - contextcheck
-    - nilerr
-    - noctx
-    - rowserrcheck
-    - sqlclosecheck
+    - deadcode
     - structcheck
-    - unparam
+    - varcheck
+    - musttag
   presets:
     - bugs
     - unused
-    # - style
   fast: false
