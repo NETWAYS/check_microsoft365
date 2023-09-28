@@ -1,0 +1,163 @@
+{
+    "Command": {
+        "microsoft365-servicehealth": {
+            "arguments": {
+                "(no key)": {
+                    "required": true,
+                    "skip_key": true,
+                    "value": "servicehealth",
+                    "order": "0"
+                },
+                "--clientid": {
+                    "description": "The client id from your app registration",
+                    "required": true,
+                    "value": "$microsoft365_clientid$"
+                },
+                "--clientsecret": {
+                    "description": "The client secret from your app registration",
+                    "required": true,
+                    "value": "$microsoft365_clientsecret$"
+                },
+                "--scope": {
+                    "description": "Represents the definition of a delegated permission",
+                    "required": false,
+                    "value": "$microsoft365_scope$"
+                },
+                "--servicenames": {
+                    "description": "The name of one or more specific service/s",
+                    "repeat_key": true,
+                    "value": "$microsoft365_servicenames$"
+                },
+                "--state-override": {
+                    "description": "States to override (e.g. STATENAME=ok)",
+                    "repeat_key": true,
+                    "required": false,
+                    "value": "$microsoft365_stateoverrides$"
+                },
+                "--tenantid": {
+                    "description": "The tenant id from your app registration",
+                    "required": true,
+                    "value": "$microsoft365_tenantid$"
+                },
+                "--timeout": {
+                    "description": "Timeout for the check",
+                    "required": false,
+                    "value": "$microsoft365_timeout$"
+                }
+            },
+            "command": "PluginContribDir + /check_microsoft365",
+            "fields": [
+                {
+                    "datafield_id": 5193,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 5196,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 5199,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 5202,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 5205,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 5208,
+                    "is_required": "n",
+                    "var_filter": null
+                },
+                {
+                    "datafield_id": 5211,
+                    "is_required": "n",
+                    "var_filter": null
+                }
+            ],
+            "methods_execute": "PluginCheck",
+            "object_name": "microsoft365-servicehealth",
+            "object_type": "object"
+        }
+    },
+    "Datafield": {
+        "5193": {
+            "varname": "microsoft365_clientid",
+            "caption": "microsoft365_clientid",
+            "description": "The client id from your app registration",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "originalId": "5193",
+            "settings": {},
+            "category": null
+        },
+        "5196": {
+            "varname": "microsoft365_clientsecret",
+            "caption": "microsoft365_clientsecret",
+            "description": "The client secret from your app registration",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "originalId": "5196",
+            "settings": {},
+            "category": null
+        },
+        "5199": {
+            "varname": "microsoft365_scope",
+            "caption": "microsoft365_scope",
+            "description": "Represents the definition of a delegated permission",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "originalId": "5199",
+            "settings": {},
+            "category": null
+        },
+        "5202": {
+            "varname": "microsoft365_servicenames",
+            "caption": "microsoft365_servicenames",
+            "description": "The name of one or more specific service/s",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeArray",
+            "format": null,
+            "originalId": "5202",
+            "settings": {},
+            "category": null
+        },
+        "5205": {
+            "varname": "microsoft365_stateoverrides",
+            "caption": "microsoft365_stateoverrides",
+            "description": "States to override (e.g. STATENAME=ok)",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeArray",
+            "format": null,
+            "originalId": "5205",
+            "settings": {},
+            "category": null
+        },
+        "5208": {
+            "varname": "microsoft365_tenantid",
+            "caption": "microsoft365_tenantid",
+            "description": "The tenant id from your app registration",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "originalId": "5208",
+            "settings": {},
+            "category": null
+        },
+        "5211": {
+            "varname": "microsoft365_timeout",
+            "caption": "microsoft365_timeout",
+            "description": "Timeout for the check",
+            "datatype": "Icinga\\Module\\Director\\DataType\\DataTypeString",
+            "format": null,
+            "originalId": "5211",
+            "settings": {},
+            "category": null
+        }
+    }
+}
