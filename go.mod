@@ -7,7 +7,7 @@ require (
 	github.com/NETWAYS/go-check v0.6.0
 	github.com/microsoft/kiota/authentication/go/azure v0.0.0-20220201092916-896e79b2ca52
 	github.com/microsoftgraph/msgraph-sdk-go v0.7.0
-	github.com/spf13/cobra v1.7.0
+	github.com/spf13/cobra v1.8.0
 )
 
 require (
