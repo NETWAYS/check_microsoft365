@@ -23,7 +23,7 @@ jobs:
             ${{ runner.os }}-golangci-lint-
 
       - name: Set up Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
 
       - name: Download modules
         run: go get -v -t ./...
